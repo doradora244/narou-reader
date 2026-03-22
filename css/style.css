@@ -1,0 +1,586 @@
+/* ===== リセット & 基本設定 ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-bg: #f8f5f0;
+  --color-surface: #ffffff;
+  --color-border: #d9cfc4;
+  --color-text: #333333;
+  --color-text-muted: #888888;
+  --color-text-light: #aaaaaa;
+  --color-accent: #8b4513;
+  --color-accent-hover: #6b3410;
+  --color-link: #5c3d1e;
+  --color-link-hover: #8b4513;
+  --color-tag-bg: #f0e8df;
+  --color-tag-text: #7a5230;
+  --color-header-bg: #2c1a0e;
+  --color-header-text: #f5ead8;
+  --font-serif: "ヒラギノ明朝 Pro", "Hiragino Mincho Pro", "游明朝", "Yu Mincho", "HGS明朝E", "HGSMinchoE", "ＭＳ Ｐ明朝", "MS PMincho", Georgia, serif;
+  --font-sans: "ヒラギノ角ゴ Pro", "Hiragino Kaku Gothic Pro", "游ゴシック", "Yu Gothic", "メイリオ", Meiryo, sans-serif;
+  --max-width: 900px;
+  --reading-max-width: 700px;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+a:hover {
+  color: var(--color-link-hover);
+  text-decoration: underline;
+}
+
+/* ===== ヘッダー ===== */
+.site-header {
+  background-color: var(--color-header-bg);
+  padding: 12px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.site-logo {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  color: var(--color-header-text);
+  font-weight: bold;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.site-logo:hover {
+  color: #f5c87a;
+  text-decoration: none;
+}
+
+.header-nav {
+  margin-left: auto;
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.header-nav a {
+  color: #c8b89a;
+  font-size: 0.9rem;
+}
+
+.header-nav a:hover {
+  color: var(--color-header-text);
+  text-decoration: none;
+}
+
+/* ===== メインレイアウト ===== */
+.main-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+}
+
+/* ===== パンくずリスト ===== */
+.breadcrumb {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.breadcrumb a {
+  color: var(--color-text-muted);
+}
+
+.breadcrumb a:hover {
+  color: var(--color-accent);
+}
+
+.breadcrumb-sep {
+  color: var(--color-text-light);
+}
+
+/* ===== セクションタイトル ===== */
+.section-title {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--color-text);
+  border-left: 3px solid var(--color-accent);
+  padding-left: 10px;
+  margin-bottom: 16px;
+}
+
+/* ===== 小説カード（一覧） ===== */
+.novel-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.novel-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 16px 20px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+
+.novel-card:hover {
+  box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+  border-color: #c4a882;
+}
+
+.novel-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.novel-card-title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: bold;
+  color: var(--color-link);
+  line-height: 1.4;
+}
+
+.novel-card:hover .novel-card-title {
+  color: var(--color-link-hover);
+}
+
+.novel-status {
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.novel-status.ongoing {
+  background: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+.novel-status.completed {
+  background: #e3f2fd;
+  color: #1565c0;
+  border: 1px solid #90caf9;
+}
+
+.novel-card-meta {
+  font-size: 0.83rem;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.novel-card-description {
+  font-size: 0.9rem;
+  color: #555555;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.novel-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 0.75rem;
+  background: var(--color-tag-bg);
+  color: var(--color-tag-text);
+  padding: 2px 8px;
+  border-radius: 3px;
+  border: 1px solid #d4b896;
+}
+
+/* ===== ページヘッダー（小説詳細） ===== */
+.page-header {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+
+.novel-title-large {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--color-text);
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.novel-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.novel-description-full {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #444;
+  border-top: 1px solid var(--color-border);
+  padding-top: 14px;
+  margin-top: 12px;
+  white-space: pre-wrap;
+}
+
+/* ===== 目次 ===== */
+.toc-list {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.toc-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid #ede6dd;
+  transition: background 0.15s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.toc-item:last-child {
+  border-bottom: none;
+}
+
+.toc-item:hover {
+  background: #fdf6ee;
+  text-decoration: none;
+}
+
+.toc-num {
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+  width: 32px;
+  flex-shrink: 0;
+}
+
+.toc-title {
+  font-size: 0.95rem;
+  color: var(--color-link);
+  flex: 1;
+}
+
+.toc-item:hover .toc-title {
+  color: var(--color-link-hover);
+}
+
+.toc-date {
+  font-size: 0.78rem;
+  color: var(--color-text-light);
+  flex-shrink: 0;
+}
+
+/* ===== 読書ページ ===== */
+.reading-layout {
+  max-width: var(--reading-max-width);
+  margin: 0 auto;
+}
+
+.chapter-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.chapter-title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--color-text);
+  line-height: 1.5;
+  margin-bottom: 8px;
+}
+
+.chapter-novel-title {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.chapter-novel-title a {
+  color: var(--color-text-muted);
+}
+
+.chapter-novel-title a:hover {
+  color: var(--color-accent);
+}
+
+/* ===== 本文 ===== */
+.chapter-body {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 40px 48px;
+  margin-bottom: 32px;
+}
+
+.chapter-text {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 2.1;
+  color: var(--color-text);
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* ===== 縦書きモード ===== */
+.chapter-body.vertical {
+  writing-mode: vertical-rl;
+  height: 70vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 32px 24px;
+}
+
+.chapter-body.vertical .chapter-text {
+  line-height: 2.2;
+}
+
+/* ===== 読書設定バー ===== */
+.reading-settings {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+}
+
+.setting-label {
+  color: var(--color-text-muted);
+  margin-right: 4px;
+}
+
+.setting-btn {
+  background: var(--color-tag-bg);
+  border: 1px solid var(--color-border);
+  color: var(--color-tag-text);
+  padding: 3px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-family: var(--font-sans);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.setting-btn:hover, .setting-btn.active {
+  background: #e0c9ae;
+  border-color: #b8956a;
+}
+
+.font-size-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.font-size-display {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  min-width: 36px;
+  text-align: center;
+}
+
+/* ===== ナビゲーション（前・次） ===== */
+.chapter-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  color: var(--color-link);
+  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  text-decoration: none;
+}
+
+.nav-btn:hover {
+  background: #fdf6ee;
+  border-color: #c4a882;
+  text-decoration: none;
+}
+
+.nav-btn:disabled, .nav-btn.disabled {
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.nav-btn-toc {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #fff;
+}
+
+.nav-btn-toc:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: #fff;
+}
+
+/* ===== ローディング ===== */
+.loading {
+  text-align: center;
+  padding: 60px 0;
+  color: var(--color-text-muted);
+  font-size: 1rem;
+}
+
+.loading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===== エラー ===== */
+.error-box {
+  background: #fff3f3;
+  border: 1px solid #ffb3b3;
+  border-radius: 4px;
+  padding: 20px 24px;
+  color: #c0392b;
+  text-align: center;
+}
+
+/* ===== インデックスページヘッダー ===== */
+.index-hero {
+  background: linear-gradient(135deg, #2c1a0e 0%, #4a2c14 100%);
+  color: var(--color-header-text);
+  padding: 32px 20px;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.index-hero-title {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  margin-bottom: 6px;
+  letter-spacing: 0.08em;
+}
+
+.index-hero-subtitle {
+  font-size: 0.9rem;
+  color: #c8b89a;
+}
+
+/* ===== フッター ===== */
+.site-footer {
+  background: var(--color-header-bg);
+  color: #8a7060;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.82rem;
+  margin-top: 40px;
+}
+
+/* ===== レスポンシブ ===== */
+@media (max-width: 600px) {
+  .chapter-body {
+    padding: 24px 20px;
+  }
+
+  .novel-title-large {
+    font-size: 1.3rem;
+  }
+
+  .chapter-title {
+    font-size: 1.2rem;
+  }
+
+  .chapter-text {
+    font-size: 1rem;
+  }
+
+  .chapter-nav {
+    flex-direction: column;
+  }
+
+  .nav-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .reading-settings {
+    gap: 10px;
+  }
+
+  .index-hero-title {
+    font-size: 1.5rem;
+  }
+
+  .novel-card-header {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
